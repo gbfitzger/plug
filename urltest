@@ -1,0 +1,34 @@
+#!/bin/sh
+START=$(date +%s)
+if [ -f /tmp/urls ]
+then
+for i in `cat /tmp/urls`
+do
+dig +short $i > /dev/null
+done
+fi
+END=$(date +%s)
+DIFF=$(( $END - $START ))
+echo "@ `date` it took -----> $DIFF seconds"
+
+#FILE=/tmp/Opening
+#if [ -f $FILE ];
+#then
+#	echo "/tmp/Opening exists -- rm file to continue execution."
+#else
+#/usr/bin/wget --output-document=/tmp/sessionList.php http://ce.byu.edu/yp/schedule.php 
+##cat /tmp/sessionList.php | grep --after-context=9 "Palymyra" | tail -1 | awk -F\> '{print $2}' | awk -F\< '{print $1}' > /tmp/session-status
+#cat /tmp/sessionList.php |grep "Palmyra" | awk -F\> '{print $11}' | awk -F\< '{print $1}' > /tmp/session-status
+#SESS="`cat /tmp/session-status`"
+#if [ `cat /tmp/session-status` != "Full" ]
+#then
+#touch /tmp/Opening
+#echo "Opening in EFY Palmyra Session!" | mail -s "Palmyra EFY Opening" gbfitzger@yahoo.com
+#echo "Opening in EFY Palmyra Session!" | mail -s "Palmyra EFY Opening" gary.fitzgerald@gmail.com
+#echo "Opening in EFY Palmyra Session!" | mail -s "Palmyra EFY Opening" gary.fitzgerald@ge.com
+#else
+#echo "Session is Full."
+#fi
+#rm /tmp/sessionList.php
+#rm /tmp/session-status
+#fi

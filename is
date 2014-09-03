@@ -1,0 +1,24 @@
+#!/bin/sh
+if [ `echo $1 | cut -c1` = "-" ]
+then
+case $1 in
+ -c)
+	NUM=`ps -ef |grep $2 |grep -v grep |wc -l`
+	echo "Number of running processes: $NUM"
+	;;
+ -k)
+	kill `ps -ef |grep $2|grep -v grep | awk '{print $2}'`
+	;;
+ -K)
+	kill -9 `ps -ef |grep $2 |grep -v grep | awk '{print $2}'`
+	;;
+ -p)
+	ps -ef |grep $2 |grep -v grep | awk '{print $2}'
+	;;
+  *)
+	echo "Error: Not a recognized command line switch"
+	;;
+esac;
+else 
+	ps -ef |grep $1|grep -v grep
+fi
